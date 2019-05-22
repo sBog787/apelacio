@@ -1,0 +1,54 @@
+<button id="appealButton">Оставить заявку</button>
+<div id="appealModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div>
+<!--TODO      вставить ссылку-->
+      <form action="wp-content/plugins/simple-tickets/php/script.php" method="post">
+        <h2>Форма обращения</h2>
+        <div class="form-item">
+          <label for="typeId">Тип обращения</label>
+          <select name="typeId" id="typeId" class="form-field">
+            <option value="0">Вопрос</option>
+            <option value="1">Предложение</option>
+            <option value="2">Жалоба</option>
+            <option value="3">Другое</option>
+          </select>
+        </div>
+        <div class="form-item">
+          <label for="secondName">Фамилия</label>
+          <input type="text" name="secondName" maxlength="255" required id="secondName" class="form-field">
+        </div>
+        <div class="form-item">
+          <label for="firstName">Имя</label>
+          <input type="text" name="firstName" maxlength="255" required id="firstName" class="form-field">
+        </div>
+        <div class="form-item">
+          <label for="patronymic">Отчество</label>
+          <input type="text" name="patronymic" maxlength="255" required id="patronymic" class="form-field">
+        </div>
+        <div class="form-item">
+          <label for="email">E-mail</label>
+          <input type="text" name="email" maxlength="255" required id="email" class="form-field">
+        </div>
+        <div class="form-item">
+          <label for="text">Текст обращения</label>
+          <textarea name="text" maxlength="65535" required id="text" class="form-field"></textarea>
+        </div>
+        <div class="form-item">
+          <label>
+            <input type="checkbox" name="flagAgreed" required id="flagAgreed">
+            Я согласен с
+              <!--TODO          вставить ссылку-->
+            <a href="#">
+              соглашением о политике конфиденциальности персональных данных образовательной организации.
+            </a>
+          </label>
+        </div>
+        <div>
+          <input type="submit" value="Отправить">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

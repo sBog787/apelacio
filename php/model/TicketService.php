@@ -18,15 +18,15 @@ class TicketService
      * @param string $patronymic Отчество гражданина.
      * @param string $email      Адрес электронной почты гражданина.
      * @param string $text       Содержимое тикета.
-     * @param string $flagAgreed Флаг согласия с политикой конфиденциальности персональных данных образовательной организации.
+     * @param int    $flagAgreed Флаг согласия с политикой конфиденциальности персональных данных образовательной организации.
      *
      * @return void
      */
-    public function createNewTicket(int $typeId, string $lastName, string $firstName, string $patronymic, string $email, string $text, string $flagAgreed): void
+    public function createNewTicket(int $typeId, string $lastName, string $firstName, string $patronymic, string $email, string $text, int $flagAgreed): void
     {
         //validation
-
-            ( new Gateway() )->insertTicket($typeId, $lastName, $firstName, $patronymic, $email, $text, $flagAgreed);}
+        ( new Gateway() )->insertTicket($typeId, $lastName, $firstName, $patronymic, $email, $text, $flagAgreed);
+    }
 
     /**
      * Метод выполняет поиск необработанных тикетов.
@@ -36,7 +36,10 @@ class TicketService
      */
     public function findUncheckedTickets(): array
     {
-        $raws   = ( new Gateway() )->selectUncheckedTickets();
+        $raws = ( new Gateway() )->selectUncheckedTickets();
+        if ($raws === false) {
+            return [];
+        }
         $result = [];
         for ($rawNumber = $raws->num_rows - 1; $rawNumber >= 0; $rawNumber --) {
             $raws->data_seek($rawNumber); //разобраться в алгоритме

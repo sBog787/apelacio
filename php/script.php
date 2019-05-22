@@ -1,19 +1,20 @@
 <?php
 
 //подумать, как это обрабатывать
-include 'TicketService.php';
+include 'model/TicketService.php';
 
 [
     'appealTypeId' => $typeId,
-    'lastName'     => $secondName,
+    'secondName'     => $secondName,
     'firstName'    => $firstName,
     'patronymic'   => $patronymic,
     'email'        => $email,
     'text'         => $text,
-    'terms'        => $flagAgreed,
+    'flagAgreed'   => $flagAgreed,
 ] = $_POST;
 
 if (isset($flagAgreed) && $flagAgreed === 'on') {
-    $flagAgreed = (int)$flagAgreed;
-    ( new TicketService() )->createNewTicket((int)$typeId, $secondName, $firstName, $patronymic, $email, $text, $flagAgreed);
+    $flagAgreed = 1;
+    $typeId     = (int)$typeId;
+    ( new TicketService() )->createNewTicket($typeId, $secondName, $firstName, $patronymic, $email, $text, $flagAgreed);
 }

@@ -32,7 +32,7 @@ class Gateway
      * @var string
      */
     private static $findTicketsStatement =
-        "SELECT typeId, secondName, firstName, patronymic, email, text
+        "SELECT id, typeId, secondName, firstName, patronymic, email, text
          FROM wp_tickets 
          WHERE statusId = 0"; //надо ли asc | подумать над запросом | получать не все сразу, а только необходимые атрибуты
 
@@ -89,8 +89,9 @@ class Gateway
      * Метод выполняет выборку записей о необработанных тикетах из бд.
      * todo сделать универсальнее
      * todo exceptions
+     * todo типизация
      */
-    public function selectUncheckedTickets(): mysqli_result
+    public function selectUncheckedTickets()
     {
         $result = $this->dbConnection->query(self::$findTicketsStatement); //throw exception
         return $result;

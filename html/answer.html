@@ -1,0 +1,54 @@
+<div id="notificationModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times</span>
+        <h2>Обращение гражданина</h2>
+        <div class="form-item">
+            <b>Тип обращения:</b>
+            <div>
+                %TYPEID%
+            </div>
+        </div>
+        <div class="form-item">
+            <b>Фамилия:</b>
+            <div>
+                %SECONDNAME%
+            </div>
+        </div>
+        <div class="form-item">
+            <b>Имя:</b>
+            <div>
+                %FIRSTNAME%
+            </div>
+        </div>
+        <div class="form-item">
+            <b>Отчество:</b>
+            <div>
+                %PATRONYMIC%
+            </div>
+        </div>
+        <div class="form-item">
+            <b>E-mail:</b>
+            <div>
+                %EMAIL%
+            </div>
+        </div>
+        <div class="form-item">
+            <b>Текст обращения:</b>
+            <div>
+                %TEXT%
+            </div>
+        </div>
+        <div class="form-item">
+<!--  TODO          action-->
+            <form action="#" method="post">
+                <div>
+                    <label for="answer">Текст ответа</label>
+                    <textarea name="answer" id="answer" maxlength="65535" required class="form-field"></textarea>
+                </div>
+                <div>
+                    <input type="submit" value="Отправить">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
