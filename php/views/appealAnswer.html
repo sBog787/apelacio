@@ -1,0 +1,149 @@
+<div id="notificationModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times</span>
+    <h2>Обращение гражданина</h2>
+    <div class="form-item">
+      <h3>Тип обращения</h3>
+      <p>
+        %TYPEID%
+      </p>
+    </div>
+    <div class="form-item">
+      <h3>Фамилия</h3>
+      <p>
+        %SECONDNAME%
+      </p>
+    </div>
+    <div class="form-item">
+      <h3>Имя</h3>
+      <p>
+        %FIRSTNAME%
+      </p>
+    </div>
+    <div class="form-item">
+      <h3>Отчество</h3>
+      <p>
+        %PATRONYMIC%
+      </p>
+    </div>
+    <div class="form-item">
+      <h3>E-mail</h3>
+      <p>
+        %EMAIL%
+      </p>
+    </div>
+    <div class="form-item">
+      <h3>Текст обращения</h3>
+      <p>
+        %TEXT%
+      </p>
+    </div>
+    <div class="form-item">
+  <!--    определиться с экшеном-->
+      <form action="#" method="post">
+        <div>
+  <!--        выделить жирным -->
+          <label for="appealAnswer">Текст ответа</label>
+          <textarea id="appealAnswer" name="answer" maxlength="65535" class="form-field" required></textarea>
+        </div>
+        <div>
+          <input type="submit" value="Отправить">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+    var modal = document.getElementById("notificationModal");
+
+    var ref = document.getElementById("notificationRef");
+
+    var span = document.getElementsByClassName("close")[0];
+
+    ref.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+<!-- сообщение об успешной отправке-->
+
+<!--<div id="notificationModal" class="modal">-->
+<!--  			<div class="modal-content">-->
+<!--    			<span class="close">&times;</span>-->
+<!--				<div>-->
+<!--					<h1>-->
+<!--						Обращения граждан-->
+<!--					</h1>-->
+<!--					<div class="form-item">-->
+<!--					<label>-->
+<!--						Тип обращения-->
+<!--						<div> ' .-->
+<!--							$row['typeId'] .-->
+<!--						'</div>-->
+<!--					</label>-->
+<!--				</div>-->
+<!--				<div class="form-item">-->
+<!--					<label>-->
+<!--						Фамилия-->
+<!--						<div> ' .-->
+<!--							$row['lastName'] .-->
+<!--					'</div>-->
+<!--					</label>-->
+<!--				</div>-->
+<!--				<div class="form-item">-->
+<!--					<label>-->
+<!--						Имя-->
+<!--						<div>' .-->
+<!--							$row['firstName'] .-->
+<!--						'</div>-->
+<!--					</label>-->
+<!--				</div>-->
+<!--				<div class="form-item">-->
+<!--					<label>-->
+<!--						Отчество-->
+<!--						<div>' .-->
+<!--							$row['patronymic'] .-->
+<!--						'</div>-->
+<!--					</label>-->
+<!--				</div>-->
+<!--				<div class="form-item">-->
+<!--					<label>-->
+<!--						E-mail-->
+<!--						<div>' .-->
+<!--							$row['email'] .-->
+<!--						'</div>-->
+<!--					</label>-->
+<!--				</div>-->
+<!--				<div class="form-item">-->
+<!--					<label>-->
+<!--						Текст обращения-->
+<!--						<div>' .-->
+<!--							$row['text'] .-->
+<!--						'</div>-->
+<!--					</label>-->
+<!--				</div>-->
+<!--				<form action="../wp-content/plugins/ticket/php/answer.php" method="post">-->
+<!--					<div class="form-item">-->
+<!--						<label>-->
+<!--							Текст ответа-->
+<!--							<textarea name="answer" maxlength="65535" class="form-field" required></textarea>-->
+<!--						</label>-->
+<!--					</div>-->
+<!--					<div>-->
+<!--						<input type="submit" value="Отправить">-->
+<!--					</div>-->
+<!--				</form>-->
+<!--		</div>-->
+<!--	  </div>-->
+<!--</div>-->

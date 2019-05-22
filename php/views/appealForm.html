@@ -1,0 +1,90 @@
+<button id="myBtn">Оставить заявку</button>
+
+<div id="myModal" class="modal">
+
+  <div class="modal-content">
+    <span class="close">&times;</span>
+<div>
+		<form action="wp-content/plugins/simple-tickets/php/script.php" method="post">
+			<h1>
+				Обращения граждан
+			</h1>
+			<div class="form-item">
+				<label>
+					Тип обращения
+					<select name="appealTypeId" class="form-field">
+						<option value="0">Вопрос</option>
+						<option value="1">Предложение</option>
+						<option value="2">Жалоба</option>
+						<option value="3">Другое</option>
+					</select>
+				</label>
+			</div>
+			<div class="form-item">
+				<label>
+					Фамилия
+					<input type="text" name="lastName" maxlength="255" required class="form-field">
+				</label>
+			</div>
+			<div class="form-item">
+				<label>
+					Имя
+					<input type="text" name="firstName" maxlength="255" required class="form-field">
+				</label>
+			</div>
+			<div class="form-item">
+				<label>
+					Отчество
+					<input type="text" name="patronymic" maxlength="255" required class="form-field">
+				</label>
+			</div>
+			<div class="form-item">
+				<label>
+					E-mail
+					<input type="email" name="email" required class="form-field">
+				</label>
+			</div>
+			<div class="form-item">
+				<label>
+					Текст обращения
+					<textarea name="text" maxlength="65535" class="form-field" required></textarea>
+				</label>
+			</div>
+			<div class="form-item">
+				<label>
+		    		<input type="checkbox" name="terms" required>
+				    Я согласен с
+				    <a href="#">
+				    	соглашением о политике конфиденциальности персональных данных образовательной организации.
+				    </a>
+		    	</label>
+			</div>
+			<div>
+				<input type="submit" value="Отправить">
+			</div>
+		</form>
+	</div>
+  </div>
+</div>
+
+<script>
+	var modal = document.getElementById("myModal");
+
+	var btn = document.getElementById("myBtn");
+
+	var span = document.getElementsByClassName("close")[0];
+
+	btn.onclick = function() {
+		modal.style.display = "block";
+	}
+
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+</script>
