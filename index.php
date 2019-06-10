@@ -2,14 +2,120 @@
 /**
  * Plugin Name: Apelacio
  * Plugin URI: https://github.com/sBog787/apelacio
- * Description: Plugin provides feedback functionality for visitors of your site. todo переписать
+ * Description: Plugin provides feedback functionality for your website.
  * Version: 0.0.1
  * Author: sBog787
  */
 
+require_once 'php/models/AppealService.php';
+require_once 'php/views/helpers/NotificationsHelper.php';
+
 register_activation_hook(__FILE__, 'activateApelacio');
 
 register_deactivation_hook(__FILE__, 'deactivateApelacio');
+
+add_action('wp_footer', 'showAppealForm');
+
+add_action('wp_head', 'applyStyles');
+
+add_action('wp_head', 'addJQuery');
+
+add_action('wp_head', 'addAjax');
+
+add_action('admin_notices', 'showNotifications');
+
+add_action('admin_head', 'applyStyles');
+
+add_action('admin_head', 'addJQuery');
+
+//add_action('admin_head', 'addAnswerAjax');
+
+function showNotifications(): void
+{
+    $appealList = ( new AppealService() )->findUncheckedAppeals();
+    if (empty($appealList)) {
+        return;
+    }
+    $helper          = new NotificationsHelper($appealList);
+    $pathToView      = __DIR__ . '/html/answer.html';
+    $pathToScriptlet = __DIR__ . '/js/answerScript.js';
+    if (file_exists($pathToView) && file_exists($pathToScriptlet)) {
+        $html = file_get_contents($pathToView);
+        $helper->viewNotificationList();
+        $html .= '<script>';
+        $html .= file_get_contents($pathToScriptlet);
+        $html .= '</script>';
+        echo $html;
+    }
+}
+
+function showAppealForm(): void
+{
+    $pathToView       = __DIR__ . '/html/form.html';
+    $pathToFormScript = __DIR__ . '/js/formScript.js';
+    $pathToPolicy     = __DIR__ . '/html/policy.html';
+
+    if (! file_exists($pathToView) || ! file_exists($pathToFormScript) || ! file_exists($pathToPolicy)) {
+        return;
+    }
+
+    $html = file_get_contents($pathToView);
+    $html .= file_get_contents($pathToPolicy);
+    $html .= '<script>';
+    $html .= file_get_contents($pathToFormScript);
+    $html .= '</script>';
+
+    echo $html;
+}
+
+function applyStyles(): void
+{
+    $pathToStyles = __DIR__ . '/css/style.css';
+
+    if (! file_exists($pathToStyles)) {
+        return;
+    }
+
+    $html = '<style>';
+    $html .= file_get_contents($pathToStyles);
+    $html .= '</style>';
+    echo $html;
+}
+
+function addJQuery(): void
+{
+    echo '<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js""></script>';
+}
+
+function addAjax(): void
+{
+    $pathToAjax = __DIR__ . '/js/ajax.js';
+
+    if (! file_exists($pathToAjax)) {
+        return;
+    }
+
+    $pathToAjax = 'wp-content/plugins/simple-tickets/js/ajax.js'; //todo переделать
+    $html       = '<script src="';
+    $html       .= $pathToAjax;
+    $html       .= '"></script>';
+    echo $html;
+}
+
+//function addAnswerAjax(): void
+//{
+//    $pathToAjax = __DIR__ . '/js/answerAjax.js';
+//
+//    if (! file_exists($pathToAjax)) {
+//        return;
+//    }
+//
+//    $pathToAjax = '../wp-content/plugins/simple-tickets/js/answerAjax.js'; //todo переделать
+//    $html       = '<script src="';
+//    $html       .= $pathToAjax;
+//    $html       .= '"></script>';
+//    echo $html;
+//}
 
 //todo логи
 const PREFIX = 'apelacio_';
@@ -49,14 +155,14 @@ function createApelacioTables(): void
                 REFERENCES apelacio_types (id),
             FOREIGN KEY (processing_status_id)
                 REFERENCES apelacio_processing_statuses (id),
-            id                   INT NOT NULL,
+            id                   INT AUTO_INCREMENT NOT NULL,
             type_id              TINYINT DEFAULT 0 NOT NULL,
             second_name          VARCHAR(255) NOT NULL,
             first_name           VARCHAR(255) NOT NULL,
             patronymic           VARCHAR(255) NOT NULL,
             email                VARCHAR(255) NOT NULL,
             text                 TEXT(65535) NOT NULL,
-            processing_status_id TINYINT(1) DEFAULT 0 NOT NULL,
+            processing_status_id TINYINT(1) DEFAULT 1 NOT NULL,
             creation_date        DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
             agree_flag           TINYINT DEFAULT 0 NOT NULL,
             delete_flag          TINYINT DEFAULT 0 NOT NULL

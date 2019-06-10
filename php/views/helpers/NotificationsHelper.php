@@ -33,12 +33,14 @@ class NotificationsHelper
         $appealDataList = $this->getAppealDataList();
         $result         = '';
         foreach ($appealDataList as $appealData) {
-            $result .=
-                //todo что-то с ид сделать
-                '<div id="message" class="notice notice-success is-dismissible">
+            //todo что-то с ид сделать
+            $appealId           = $appealData['id'];
+            $notificationLinkId = 'notificationRef_' . $appealId;
+            $result             .=
+                '<div id="message" class="notice notice-success is-dismissible" data-id="' . $appealId . '">
                     <p>
                         Новое обращение от ' . $appealData['fullName'] . '
-                        <a id="notificationRef" href="#">Просмотреть</a>
+                        <a id="' . $notificationLinkId . '" href="#" class="notificationRef">Просмотреть</a>
                     </p>
                 </div>';
         }
@@ -64,10 +66,10 @@ class NotificationsHelper
      */
     function createFullName(array $appealData): string
     {
-        $secondName = $appealData['secondName'];
-        $firstName  = $appealData['firstName'];
+        $secondName = $appealData['second_name'];
+        $firstName  = $appealData['first_name'];
         $patronymic = $appealData['patronymic'];
-        $fullName   = $secondName . ' ' . substr($firstName, 0, 1) . '.' . substr($patronymic, 0, 1) . '.';
+        $fullName   = $secondName . ' ' . mb_substr($firstName, 0, 1) . '.' . mb_substr($patronymic, 0, 1) . '.';
         return $fullName;
     }
 }
