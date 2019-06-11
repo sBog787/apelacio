@@ -20,4 +20,5 @@ function sendAjaxForm (ajax_form, url) {
         },
         dataType: 'html'
     });
+    document.getElementById('ajax_form').reset();
 }

@@ -11,11 +11,11 @@ $(document).ready(function () {
             function (e) {
                 e.preventDefault();
                 var id = appealId.substring(16);
-                var answer = 'привет-привте';
+                var answer = $('#answer').val();
                 $.ajax({
                     url: '../wp-content/plugins/simple-tickets/php/controllers/AnswerController.php',
                     type: 'POST',
-                    data: {id: id, answer: answer}, //todo answer
+                    data: {id: id, answer: answer},
                     dataType: 'html',
                     success: () => {
                         alert('Ваш ответ отправлен!')
@@ -23,7 +23,10 @@ $(document).ready(function () {
                 });
                 var modal = document.getElementById("notificationModal");
                 modal.style.display = "none";
-                // document.getElementById('message_' + id).remove(); //todo убрать уведомление
+                // document.getElementById('message_' + id).remove();
+                var removeStatement = '[data-id=' + id + ']';
+                $(removeStatement).remove();
+                document.getElementById('ajax_answer').reset();
                 return false;
             }
         );

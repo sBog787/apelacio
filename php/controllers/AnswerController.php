@@ -15,13 +15,14 @@ class AnswerController
         }
 
         $id = (int)$id;
-        (new AppealService())->rejectAppealById($id);
+        ( new AppealService() )->rejectAppealById($id);
     }
 
     public function actionSendAnswer(array $request): void
     {
+
         [
-            'id' => $id,
+            'id'     => $id,
             'answer' => $answer,
         ] = $request;
 
@@ -29,16 +30,18 @@ class AnswerController
             return;
         }
 
-        $id = (int)$id;
-        (new AppealService())->updateAppealStatusToReviewed($id);
-        //mail
+        $id     = (int)$id;
+        $result = ( new AppealService() )->findAppealById($id);
+        ( new AppealService() )->updateAppealStatusToReviewed($id);
+        $email = $result[0]['email'];
+        mail($email, "TOIPKRO", $answer);
     }
 }
 
 if (isset($_POST['id'])) {
     if (isset($_POST['answer'])) {
-        (new AnswerController())->actionSendAnswer($_POST);
+        ( new AnswerController() )->actionSendAnswer($_POST);
     } else {
-        (new AnswerController())->actionRejectAppeal($_POST);
+        ( new AnswerController() )->actionRejectAppeal($_POST);
     }
 }

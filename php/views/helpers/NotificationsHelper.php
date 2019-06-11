@@ -33,7 +33,6 @@ class NotificationsHelper
         $appealDataList = $this->getAppealDataList();
         $result         = '';
         foreach ($appealDataList as $appealData) {
-            //todo что-то с ид сделать
             $appealId           = $appealData['id'];
             $notificationLinkId = 'notificationRef_' . $appealId;
             $result             .=

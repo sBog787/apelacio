@@ -28,8 +28,6 @@ add_action('admin_head', 'applyStyles');
 
 add_action('admin_head', 'addJQuery');
 
-//add_action('admin_head', 'addAnswerAjax');
-
 function showNotifications(): void
 {
     $appealList = ( new AppealService() )->findUncheckedAppeals();
@@ -101,21 +99,6 @@ function addAjax(): void
     $html       .= '"></script>';
     echo $html;
 }
-
-//function addAnswerAjax(): void
-//{
-//    $pathToAjax = __DIR__ . '/js/answerAjax.js';
-//
-//    if (! file_exists($pathToAjax)) {
-//        return;
-//    }
-//
-//    $pathToAjax = '../wp-content/plugins/simple-tickets/js/answerAjax.js'; //todo переделать
-//    $html       = '<script src="';
-//    $html       .= $pathToAjax;
-//    $html       .= '"></script>';
-//    echo $html;
-//}
 
 //todo логи
 const PREFIX = 'apelacio_';
