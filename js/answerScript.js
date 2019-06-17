@@ -12,10 +12,11 @@ $(document).ready(function () {
                 e.preventDefault();
                 var id = appealId.substring(16);
                 var answer = $('#answer').val();
+                var appeal = $('#text').text();
                 $.ajax({
                     url: '../wp-content/plugins/apelacio/php/controllers/AnswerController.php',
                     type: 'POST',
-                    data: {id: id, answer: answer},
+                    data: {id: id, answer: answer, appeal: appeal},
                     dataType: 'html',
                     success: () => {
                         alert('Ваш ответ отправлен!')

@@ -24,6 +24,7 @@ class AnswerController
         [
             'id'     => $id,
             'answer' => $answer,
+            'appeal' => $appeal,
         ] = $request;
 
         if (! isset($id) || ! isset($answer)) {
@@ -33,8 +34,11 @@ class AnswerController
         $id     = (int)$id;
         $result = ( new AppealService() )->findAppealById($id);
         ( new AppealService() )->updateAppealStatusToReviewed($id);
-        $email = $result[0]['email'];
-        mail($email, "TOIPKRO", $answer);
+        $email   = $result[0]['email'];
+        $message = 'Ваше обращение: ' . $appeal . "\n\n";
+        $message .= 'Ответ на обращение: ' . $answer;
+        $subject = '=?utf-8?b?' . base64_encode('ТОИПКРО: ваша завка рассмотрена') . '?=';
+        mail($email, $subject, $message);
     }
 }
 
