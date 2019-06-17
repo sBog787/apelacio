@@ -1,4 +1,4 @@
-# simple-tickets
+# apelacio
 Simple tickets plugin for WordPress.
 
 # changelog

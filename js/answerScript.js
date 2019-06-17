@@ -5,7 +5,7 @@ $(document).ready(function () {
         e.preventDefault();
         modal.style.display = "block";
         var appealId = this.id;
-        sendAjaxForm(appealId, 'ajax_form', '../wp-content/plugins/simple-tickets/php/controllers/AppealController.php');
+        sendAjaxForm(appealId, 'ajax_form', '../wp-content/plugins/apelacio/php/controllers/AppealController.php');
 
         $("#ajax_answer").submit(
             function (e) {
@@ -13,7 +13,7 @@ $(document).ready(function () {
                 var id = appealId.substring(16);
                 var answer = $('#answer').val();
                 $.ajax({
-                    url: '../wp-content/plugins/simple-tickets/php/controllers/AnswerController.php',
+                    url: '../wp-content/plugins/apelacio/php/controllers/AnswerController.php',
                     type: 'POST',
                     data: {id: id, answer: answer},
                     dataType: 'html',
@@ -38,7 +38,7 @@ $(document).ready(function () {
         var messageId = parent.attr('data-id');
 
         $.ajax({
-            url: '../wp-content/plugins/simple-tickets/php/controllers/AnswerController.php',
+            url: '../wp-content/plugins/apelacio/php/controllers/AnswerController.php',
             type: "POST",
             data: {id: messageId},
             dataType: 'html'

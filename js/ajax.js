@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $("#ajax_form").submit(
         function () {
-            sendAjaxForm('ajax_form', 'wp-content/plugins/simple-tickets/php/controllers/AppealController.php');
+            sendAjaxForm('ajax_form', 'wp-content/plugins/apelacio/php/controllers/AppealController.php');
             var modal = document.getElementById("appealModal");
             modal.style.display = "none";
             return false;

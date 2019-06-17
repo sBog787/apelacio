@@ -93,7 +93,7 @@ function addAjax(): void
         return;
     }
 
-    $pathToAjax = 'wp-content/plugins/simple-tickets/js/ajax.js'; //todo переделать
+    $pathToAjax = 'wp-content/plugins/apelacio/js/ajax.js'; //todo переделать
     $html       = '<script src="';
     $html       .= $pathToAjax;
     $html       .= '"></script>';
