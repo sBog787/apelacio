@@ -7,7 +7,7 @@ $(document).ready(function () {
         var appealId = this.id;
         sendAjaxForm(appealId, 'ajax_form', '../wp-content/plugins/simple-tickets/php/controllers/AppealController.php');
 
-        $("#answerBtn").click(
+        $("#ajax_answer").submit(
             function (e) {
                 e.preventDefault();
                 var id = appealId.substring(16);

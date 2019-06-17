@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#formBtn").click(
+    $("#ajax_form").submit(
         function () {
             sendAjaxForm('ajax_form', 'wp-content/plugins/simple-tickets/php/controllers/AppealController.php');
             var modal = document.getElementById("appealModal");
