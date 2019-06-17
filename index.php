@@ -56,9 +56,11 @@ function showAppealForm(): void
     if (! file_exists($pathToView) || ! file_exists($pathToFormScript) || ! file_exists($pathToPolicy)) {
         return;
     }
+    $policy = file_get_contents($pathToPolicy);
+    $policy = str_replace('https://mysite.ru', $_SERVER['SERVER_NAME'], $policy);
 
     $html = file_get_contents($pathToView);
-    $html .= file_get_contents($pathToPolicy);
+    $html .= $policy;
     $html .= '<script>';
     $html .= file_get_contents($pathToFormScript);
     $html .= '</script>';
